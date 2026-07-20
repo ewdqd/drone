@@ -30,15 +30,21 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: 打印目录结构 (排查用)
+      - name: 安装 Maven
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq maven
+
+      - name: 验证环境
         run: |
-          echo "=== Maven 版本 ===" && mvn --version
-          echo "=== 仓库根目录 ===" && ls -la
-          echo "=== backen/drone ===" && ls -la backen/drone/
-          echo "=== pom.xml 存在? ===" && test -f backen/drone/pom.xml && echo "YES" || echo "NO"
+          set -x
+          java -version
+          mvn --version
+          ls -la
+          ls -la backen/drone/
+          test -f backen/drone/pom.xml && echo "pom.xml: FOUND" || echo "pom.xml: MISSING"
 
       - name: Maven 编译打包
         run: |
+          set -eo pipefail
           cd backen/drone
           mvn clean package -DskipTests --batch-mode --errors --no-transfer-progress
 
