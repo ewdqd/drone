@@ -9,11 +9,31 @@
         <outputRelativeToContentRoot value="true" />
         <module name="drone" />
       </profile>
+      <profile name="Annotation profile for drone-parent" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="drone-user-service" />
+        <module name="drone-common" />
+        <module name="drone-news-service" />
+        <module name="drone-rank-service" />
+        <module name="drone-action-service" />
+        <module name="drone-gateway" />
+      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="drone" options="-parameters" />
+      <module name="drone-action-service" options="-parameters" />
+      <module name="drone-common" options="-parameters" />
+      <module name="drone-gateway" options="-parameters" />
+      <module name="drone-news-service" options="-parameters" />
+      <module name="drone-rank-service" options="-parameters" />
+      <module name="drone-user-service" options="-parameters" />
     </option>
   </component>
 </project>
