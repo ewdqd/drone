@@ -33,7 +33,7 @@ jobs:
 
       - name: Maven 编译打包
         run: |
-          cd drone
+          cd backen/drone
           chmod +x mvnw
           ./mvnw clean package -DskipTests
 
@@ -42,12 +42,12 @@ jobs:
         with:
           name: all-jars
           path: |
-            drone/drone-user-service/target/*.jar
-            drone/drone-news-service/target/*.jar
-            drone/drone-rank-service/target/*.jar
-            drone/drone-action-service/target/*.jar
-            drone/drone-gateway/target/*.jar
-            drone/drone-common/target/*.jar
+            backen/drone/drone-user-service/target/*.jar
+            backen/drone/drone-news-service/target/*.jar
+            backen/drone/drone-rank-service/target/*.jar
+            backen/drone/drone-action-service/target/*.jar
+            backen/drone/drone-gateway/target/*.jar
+            backen/drone/drone-common/target/*.jar
 
   # ============================================================
   # Job 2: 构建并推送镜像（5 个服务并行）
@@ -101,8 +101,8 @@ jobs:
       - name: 构建并推送镜像
         uses: docker/build-push-action@v5
         with:
-          context: ./drone
-          file: ./drone/${{ matrix.dockerfile }}
+          context: ./backen/drone
+          file: ./backen/drone/${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
