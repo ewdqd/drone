@@ -55,7 +55,7 @@ public class GatewayController {
     public HttpResultResponse login(@RequestBody UserLoginDTO loginDTO) {
         HttpResultResponse result = userRpcService.login(
                 loginDTO.getUsername(), loginDTO.getPassword());
-        if (result.getCode() != null && result.getCode() == HttpStatus.UNAUTHORIZED.value()) {
+        if (result.getCode() != 0 && result.getCode() == HttpStatus.UNAUTHORIZED.value()) {
             return result;
         }
         // Extract user info, create JWT at gateway level
