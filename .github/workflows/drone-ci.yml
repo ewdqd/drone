@@ -32,15 +32,15 @@ jobs:
 
       - name: 打印目录结构 (排查用)
         run: |
+          echo "=== Maven 版本 ===" && mvn --version
           echo "=== 仓库根目录 ===" && ls -la
           echo "=== backen/drone ===" && ls -la backen/drone/
-          echo "=== Maven 模块 ===" && ls -d backen/drone/drone-*/
+          echo "=== pom.xml 存在? ===" && test -f backen/drone/pom.xml && echo "YES" || echo "NO"
 
       - name: Maven 编译打包
         run: |
           cd backen/drone
-          chmod +x mvnw
-          ./mvnw clean package -DskipTests --batch-mode --errors --no-transfer-progress
+          mvn clean package -DskipTests --batch-mode --errors --no-transfer-progress
 
       - name: 上传 jar 包
         uses: actions/upload-artifact@v4
