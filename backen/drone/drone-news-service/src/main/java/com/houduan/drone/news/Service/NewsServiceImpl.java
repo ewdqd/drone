@@ -164,7 +164,7 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements Ne
                 // 最后兜底查库
                 News news = getById(id);
                 if (news == null) {
-                    return ApiResult.success("新闻查询成功", null);
+                    return ApiResult.success("新闻查询成功");
                 }
                 NewsVO newsVO = new NewsVO();
                 BeanUtils.copyProperties(news, newsVO);
@@ -175,7 +175,7 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements Ne
             // 兜底查库
             News news = getById(id);
             if (news == null) {
-                return ApiResult.success("新闻查询成功", null);
+                return ApiResult.success("新闻查询成功");
             }
             NewsVO newsVO = new NewsVO();
             BeanUtils.copyProperties(news, newsVO);
