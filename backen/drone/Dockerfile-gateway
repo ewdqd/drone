@@ -1,0 +1,12 @@
+# 网关服务 Dockerfile
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+COPY drone-gateway/target/drone-gateway-*.jar app.jar
+
+EXPOSE 9090 20880
+
+ENV JAVA_OPTS="-Xms256m -Xmx512m"
+
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

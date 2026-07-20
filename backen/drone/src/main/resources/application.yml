@@ -1,0 +1,35 @@
+server:
+  port: 9090
+spring:
+  servlet:
+    multipart:
+      enabled: true # 启用文件上传
+      max-file-size: 10MB # 单个文件最大大小
+      max-request-size: 100MB # 单次请求总文件最大大小（多文件上传时生效）
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:dec}?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+jwt:
+  issuer: amov
+  secret: ${JWT_SECRET:your-jwt-secret-key-min-32-chars}
+  age: 86400
+url:
+  manage:
+    prefix: manage
+    version: /api/v1
+
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    database: 0
+    username: # if you enable
+    password: ${REDIS_PASSWORD:}
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+

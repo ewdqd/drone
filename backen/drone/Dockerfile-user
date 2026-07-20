@@ -1,0 +1,15 @@
+# 用户服务 Dockerfile
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+# 从 CI 已编译好的 target 目录复制 jar 包
+COPY drone-user-service/target/drone-user-service-*.jar app.jar
+
+# 暴露服务端口（HTTP 端口 9091，Dubbo 协议端口 20880）
+EXPOSE 9091 20880
+
+# JVM 参数优化
+ENV JAVA_OPTS="-Xms256m -Xmx512m"
+
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

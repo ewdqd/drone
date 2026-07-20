@@ -1,0 +1,21 @@
+server:
+  port: 9090
+
+dubbo:
+  application:
+    name: drone-gateway
+  registry:
+    address: zookeeper://localhost:2181
+  consumer:
+    check: false
+    timeout: 5000
+
+jwt:
+  issuer: amov
+  secret: dikongjingjiyanjiuyuan
+  age: 666
+
+url:
+  manage:
+    prefix: manage
+    version: /api/v1

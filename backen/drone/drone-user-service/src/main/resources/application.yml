@@ -1,0 +1,30 @@
+server:
+  port: 9091
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/dec?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 2410120044
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+dubbo:
+  application:
+    name: drone-user-service
+  registry:
+    address: zookeeper://localhost:2181
+  protocol:
+    name: dubbo
+    port: -1
+  provider:
+    timeout: 5000
+
+jwt:
+  issuer: amov
+  secret: dikongjingjiyanjiuyuan
+  age: 666
+
+url:
+  manage:
+    prefix: manage
+    version: /api/v1
