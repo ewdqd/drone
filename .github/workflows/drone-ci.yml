@@ -30,11 +30,17 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: 打印目录结构 (排查用)
+        run: |
+          echo "=== 仓库根目录 ===" && ls -la
+          echo "=== backen/drone ===" && ls -la backen/drone/
+          echo "=== Maven 模块 ===" && ls -d backen/drone/drone-*/
+
       - name: Maven 编译打包
         run: |
           cd backen/drone
           chmod +x mvnw
-          ./mvnw clean package -DskipTests
+          ./mvnw clean package -DskipTests --batch-mode --errors --no-transfer-progress
 
       - name: 上传 jar 包
         uses: actions/upload-artifact@v4
@@ -47,6 +53,7 @@ jobs:
             backen/drone/drone-action-service/target/*.jar
             backen/drone/drone-gateway/target/*.jar
             backen/drone/drone-common/target/*.jar
+          if-no-files-found: warn
 
   # ============================================================
   # Job 2: 构建并推送镜像（5 个服务并行）
